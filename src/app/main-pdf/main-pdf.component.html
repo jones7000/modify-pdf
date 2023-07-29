@@ -1,0 +1,85 @@
+
+<div class="button-container">
+    <button type="button" mat-raised-button color="accent" class="btn-small" (click)="myInput.click()">Add</button>
+    <input hidden #myInput class="form-control" type="file" 
+            (change)="onChange($event)" multiple accept="application/pdf">
+    <button mat-raised-button color="accent" class="btn-small" (click)="onClear()">
+        Clear
+    </button>
+    <button mat-raised-button color="accent" class="btn-small" (click)="onSave()" [disabled]="files? false : true">
+        <mat-spinner diameter="15" color="primary"  *ngIf="spinnerSavePdf"></mat-spinner>
+        Save
+    </button>
+    <button mat-mini-fab color="accent" class="btn-small" (click)="scaleImage('-')" [disabled]="listView || pageImages.length == 0">
+        <mat-icon>zoom_out</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" class="btn-small" (click)="scaleImage('+')" [disabled]="listView || pageImages.length == 0">
+        <mat-icon>zoom_in</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" class="btn-small" (click)="changeView()">
+      <mat-icon *ngIf="!listView">view_list</mat-icon>
+      <mat-icon *ngIf="listView">view_agenda</mat-icon>
+  </button>
+  <button mat-mini-fab color="accent" class="btn-small" (click)="showFileInfo()" [disabled]="pageImages.length == 0">
+    <mat-icon>info</mat-icon>
+</button>
+</div>
+
+
+<br>
+
+<div *ngIf="spinnerLoadPdf" class="progress-container">
+  <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+  <div style="text-align: center; align-items: center;">
+  <p>Loading...</p>
+  <button mat-stroked-button color="warn" (click)="cancelLoad()" >Stop</button>
+  </div>
+</div>
+
+<div *ngIf="pageImages.length == 0 && !spinnerLoadPdf" style="text-align: center;">
+  <div class="dropzone" appDnd>
+    <input type="file" #fileDropRef id="fileDropRef" (change)="onChange($event)" multiple accept="application/pdf">
+    <mat-icon>insert_drive_file</mat-icon>
+    <h3>Drag and drop file here</h3>
+    <label>Add File</label>
+  </div>
+</div>
+
+<div cdkDropList #containerRef1 class="example-list" (cdkDropListDropped)="drop($event)" *ngIf="!listView && pageImages.length > 0 && !spinnerLoadPdf">
+    <div class="example-box" *ngFor="let pageImage of pageImages; let i = index" cdkDrag>
+      <div  class="image-container">
+        <img #imgRef [src]="pageImage.url" alt="Page {{ pageImage.page }}" class="image">
+      </div>
+      <!--<div class="page-filename">
+        <p class="page-number">Seite {{ pageImage.page+1 }}</p>
+        <p class="file-name">{{ pageImage.fileName }}</p>
+      </div>-->
+      <div matListItemTitle>{{ pageImage.fileName }}</div>
+      <div matListItemLine>Seite: {{ pageImage.page+1 }}</div>
+      <button mat-icon-button matTooltip="delete" class="remove-button" color="warn" (click)="remove(pageImage)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      <!--<span class="new-page-number">{{i+1}}</span>-->
+      <div class="mat-badge" matBadge={{i+1}} matBadgeOverlap="true" class="demo-section"></div>
+    </div>
+</div>
+  
+<div *ngIf="listView && pageImages.length > 0 && !spinnerLoadPdf" >
+  <div
+  cdkDropList
+  class="example-list"
+  (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let pageImage of pageImages; let i = index" cdkDrag >
+    <div class="list-text">
+      <div matListItemLine>{{i+1}}</div>
+      <mat-icon mat-list-icon>picture_as_pdf</mat-icon>
+      <div matListItemTitle class="list-title">{{ pageImage.fileName }}</div>
+      <div matListItemLine>Seite: {{ pageImage.page+1 }}</div>
+      <button mat-icon-button matTooltip="delete" color="warn" (click)="remove(pageImage)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </div>
+    
+  </div>
+  </div>
+</div>

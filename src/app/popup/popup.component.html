@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Details</h1>
+<div mat-dialog-content class="mat-container">
+    <mat-form-field>
+        <mat-select [(ngModel)]="selectedFile" (selectionChange)="onFileSelect()">
+          <mat-option *ngFor="let file of files" [value]="file">{{ file.fileName }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>File Name</mat-label>
+      <input matInput [(ngModel)]="selectedFile.fileName" [formControl]="nameControl" required>
+      <mat-error *ngIf="nameControl.errors?.['required']">File Name is required</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Author">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Subject</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Subject">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Creator</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Creator">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Producer</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Producer">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Keywords</mat-label>
+      <input matInput [(ngModel)]="selectedFile.Keywords">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Creation Date</mat-label>
+      <input matInput [matDatepicker]="creationDate" [(ngModel)]="selectedFile.CreationDate">
+      <mat-datepicker-toggle matSuffix [for]="creationDate"></mat-datepicker-toggle>
+      <mat-datepicker #creationDate></mat-datepicker>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-button (click)="close()">Close</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>

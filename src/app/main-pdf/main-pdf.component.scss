@@ -1,0 +1,242 @@
+ 
+  @import "../../styles.scss";  
+  
+  .example-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 90%;
+  }
+
+  .example-box {
+    height: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #fafafa;
+    position: relative;
+    display: flex;
+    /*background-color: #f2f2f2;*/
+    flex-basis: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    transition: opacity 400ms ease-in-out;
+  }
+
+  .list-text {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .list-text > div:first-child {
+    margin-right: auto;
+  }
+  
+  .list-text > div:last-child {
+    margin-left: auto;
+  }
+
+  .example-box.fade-out {
+    opacity: 0;
+  }
+
+  .image-container {
+    position: relative;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+
+  .remove-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .mat-badge {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+  }
+
+.page-number,
+.file-name {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.list-title {
+  width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.progress-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dropzone {
+  height: 150px;
+  width: 80%;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 5px;
+  border: dashed 1px #979797;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.dropzone input {
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.dropzone label {
+  color: white;
+  width: 180px;
+  height: 40px;
+  border-radius: 21.5px;
+  background-color: mat-color($angular-warn, default);
+  padding: 8px 16px;
+}
+
+@media screen and (max-width: 680px) {
+  .button-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .btn-small {
+    font-size: 90%;
+    height: 3.5em;
+    width: 3.5em;
+  }
+
+  .list-text {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .list-text mat-icon {
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+  }
+
+  .example-box {
+    padding: 5px;
+  }
+
+  .list-title {
+    width: 145px;
+  }
+}
+
+.fileover {
+  animation: shake 1s;
+  animation-iteration-count: infinite;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
